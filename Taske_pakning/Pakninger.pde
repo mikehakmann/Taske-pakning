@@ -1,5 +1,5 @@
-class Pakninger {
+//class Pakninger {
 
-  Pakninger
+//  Pakninger
   
-}
+//}
