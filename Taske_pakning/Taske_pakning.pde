@@ -1,4 +1,3 @@
-
 String[] names  = {"kort", "kompas", "vand", "sandwich", "sukker", "dåsemad", "banan", "æble", "ost", "øl", "solcreme", "kamera", "T-shirt", "bukser", "praply", "vandtætte bukser", "vandtæt overtøj", "pung", "solbriller", "håndklæde", "sokker", "bog", "notesbog", "telt"};//String array med de forskellige tings navne
 int   [] weight = {90, 130, 1530, 500, 150, 680, 270, 390, 230, 520, 110, 320, 240, 480, 730, 420, 430, 220, 70, 180, 40, 300, 900, 2000};//Array med de forskellige tings vægt i gram
 int   [] value  = {150, 35, 200, 160, 60, 45, 60, 40, 30, 10, 70, 30, 15, 10, 40, 70, 75, 80, 20, 12, 50, 10, 1, 150};//Array med de forskellige tings pris i kroner
@@ -67,6 +66,8 @@ void setup() {
     veight=0;
     fitness=0;
   }
+  println("Første generation");
+
   for (int i=0; i<backpackLength; i++) {
     for (int j = 0; j<names.length+2; j++) {
       print(backpacks[i][j]+" ");
@@ -108,7 +109,6 @@ void setup() {
 
   for (int i = 0; i<backpackLength; i++) {
     postmalone = ceil(backpacks[i][backpack.length-2] / fitnesTimes10);
-    println(postmalone);
 
     for (int r=0; r <postmalone; postmalone--) {
       if (gay < backpackLength) {
@@ -119,7 +119,7 @@ void setup() {
       }
     }
   }
-
+println("Anden generation");
   for (int i=0; i<backpackLength; i++) {
     for (int j = 0; j<names.length+2; j++) {
       print(backpacks2[i][j]+" ");
