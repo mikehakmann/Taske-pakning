@@ -43,7 +43,6 @@ void setup() {
         backpack[backpack.length-2] = (int) fitness;
         backpack[backpack.length-1] = (int) veight;
         if (veight>backpackSize) {
-          backpack[backpack.length-1] = 0;
           backpack[backpack.length-2] = 0;
         }
       }
@@ -53,7 +52,6 @@ void setup() {
     backpacks[i][backpack.length-1] = (int) veight;
 
     if (veight>backpackSize) {
-      backpacks[i][backpack.length-1] = 0;
       backpacks[i][backpack.length-2] = 0;
     }
     writeBackpack();
@@ -84,17 +82,15 @@ void setup() {
   }
   for (int i=0; i<backpackLength; i++) {
 
-    if (secHighestFit==0) {
       if (backpacks[i][backpack.length-2]==highestFit) {
         for (int j=i+1; j<backpackLength; j++) {
           if (backpacks[j][backpack.length-2]>=secHighestFit) {
             secHighestFit=backpacks[j][backpack.length-2];
-          }
+          
         }
       }
     }
   }
-
   println("Highest fitness = "+highestFit);
   println("Second  highest = "+secHighestFit);
 }
