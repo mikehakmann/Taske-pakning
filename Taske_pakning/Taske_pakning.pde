@@ -7,8 +7,11 @@ float veight    = 0;
 float backpackSize = 5000; //Taskens plads i gram
 int backpackLength = 10;
 
-int backpack[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}; //object number 0-9, fitness number 10, weight number 11
+int [] backpack = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}; //object number 0-9, fitness number 10, weight number 11
 int numBackpack = 0; // hvor mange rygsække vi starter med
+
+int [][] backpacks = new  int [backpackLength][backpack.length] ;
+
 
 
 PrintWriter output;
@@ -18,6 +21,8 @@ PrintWriter output;
 
 void setup() {
   size (100, 100);
+
+
 
   if (names.length!=weight.length || names.length !=value.length)  //Tjekker om der er lige mange af de forskellige tal i names, weight og value arraysne
   {
@@ -42,9 +47,17 @@ void setup() {
           backpack[backpack.length-2] = 0;
         }
       }
+      backpacks[i][j]=backpack[j];
     }
+    backpacks[i][backpack.length-2] = (int) fitness;
+    backpacks[i][backpack.length-1] = (int) veight;
 
+    if (veight>backpackSize) {
+      backpacks[i][backpack.length-1] = 0;
+      backpacks[i][backpack.length-2] = 0;
+    }
     writeBackpack();
+
     numBackpack++;
     for (int j = 0; j< backpack.length; j++) {
       backpack[j] = 0;
@@ -52,8 +65,38 @@ void setup() {
     veight=0;
     fitness=0;
   }
-}
+  for (int i=0; i<backpackLength; i++) {
+    for (int j = 0; j<names.length+2; j++) {
+      print(backpacks[i][j]+" ");
+    }   
+    println();
+  }
+  int highestFit=0;
+  int sechighestFit=0;
 
+  for (int i=0; i<backpackLength; i++) {
+    if (backpacks[i][backpack.length-2]>=highestFit) {
+      sechighestFit=highestFit;
+      highestFit=backpacks[i][backpack.length-2];
+    }
+  }
+  for (int i=0; i<backpackLength; i++) {
+
+    if (sechighestFit==0) {
+      if (backpacks[i][backpack.length-2]==highestFit) {
+        for (int j=i+1; j<backpackLength; j++) {
+          if (backpacks[i][backpack.length-2]>=highestFit) {
+            sechighestFit=backpacks[j][backpack.length-2];
+          }
+        }            
+        println("donut");
+      }
+    }
+  }
+
+  println(highestFit);
+  println(sechighestFit);
+}
 void writeBackpack() {
   for (int i=0; i<backpack.length; i++) {
     output.print(backpack[i] + " ");
