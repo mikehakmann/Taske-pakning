@@ -6,11 +6,15 @@ float fitness   = 0;
 float veight    = 0;
 float backpackSize = 5000; //Taskens plads i gram
 int backpackLength = 10;
-
+int totalFitness = 0;
 int [] backpack = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}; //object number 0-9, fitness number 10, weight number 11
+
 int numBackpack = 0; // hvor mange rygsække vi starter med
 
+
 int [][] backpacks = new  int [backpackLength][backpack.length] ;
+int [][] backpacks2 = new  int [backpackLength][backpack.length] ;
+
 
 
 
@@ -82,18 +86,49 @@ void setup() {
   }
   for (int i=0; i<backpackLength; i++) {
 
-      if (backpacks[i][backpack.length-2]==highestFit) {
-        for (int j=i+1; j<backpackLength; j++) {
-          if (backpacks[j][backpack.length-2]>=secHighestFit) {
-            secHighestFit=backpacks[j][backpack.length-2];
-          
+    if (backpacks[i][backpack.length-2]==highestFit) {
+      for (int j=i+1; j<backpackLength; j++) {
+        if (backpacks[j][backpack.length-2]>=secHighestFit) {
+          secHighestFit=backpacks[j][backpack.length-2];
         }
       }
     }
   }
   println("Highest fitness = "+highestFit);
   println("Second  highest = "+secHighestFit);
+
+  for (int i=0; i<backpackLength; i++) {
+    totalFitness +=backpacks[i][backpack.length-2];
+  }
+  println("Total Fitness   = " + totalFitness);
+  int postmalone =0;
+  float fitnesTimes10 = totalFitness / backpackLength;
+  int gay=0;
+  println("fitness / "+ backpackLength+" = " + fitnesTimes10);
+
+  for (int i = 0; i<backpackLength; i++) {
+    postmalone = ceil(backpacks[i][backpack.length-2] / fitnesTimes10);
+    println(postmalone);
+
+    for (int r=0; r <postmalone; postmalone--) {
+      if (gay < backpackLength) {
+        for (int j=0; j <backpack.length; j++) {
+          backpacks2[gay][j] = backpacks[i][j];
+        }
+        gay++;
+      }
+    }
+  }
+
+  for (int i=0; i<backpackLength; i++) {
+    for (int j = 0; j<names.length+2; j++) {
+      print(backpacks2[i][j]+" ");
+    }   
+    println();
+  }
 }
+
+
 void writeBackpack() {
   for (int i=0; i<backpack.length; i++) {
     output.print(backpack[i] + " ");
@@ -110,6 +145,8 @@ void writeBackpack() {
 void draw () {
   background(100);
 }
+
+
 
 
 /*To do
