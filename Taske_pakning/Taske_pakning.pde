@@ -71,31 +71,32 @@ void setup() {
     }   
     println();
   }
+
+  //Linjerne under tjekker hvad det højeste og andet højeste tal er
   int highestFit=0;
-  int sechighestFit=0;
+  int secHighestFit=0;
 
   for (int i=0; i<backpackLength; i++) {
     if (backpacks[i][backpack.length-2]>=highestFit) {
-      sechighestFit=highestFit;
+      secHighestFit=highestFit;
       highestFit=backpacks[i][backpack.length-2];
     }
   }
   for (int i=0; i<backpackLength; i++) {
 
-    if (sechighestFit==0) {
+    if (secHighestFit==0) {
       if (backpacks[i][backpack.length-2]==highestFit) {
         for (int j=i+1; j<backpackLength; j++) {
-          if (backpacks[i][backpack.length-2]>=highestFit) {
-            sechighestFit=backpacks[j][backpack.length-2];
+          if (backpacks[j][backpack.length-2]>=secHighestFit) {
+            secHighestFit=backpacks[j][backpack.length-2];
           }
-        }            
-        println("donut");
+        }
       }
     }
   }
 
-  println(highestFit);
-  println(sechighestFit);
+  println("Highest fitness = "+highestFit);
+  println("Second  highest = "+secHighestFit);
 }
 void writeBackpack() {
   for (int i=0; i<backpack.length; i++) {
